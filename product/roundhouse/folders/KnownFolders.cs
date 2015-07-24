@@ -2,6 +2,7 @@ namespace roundhouse.folders
 {
     public interface KnownFolders
     {
+        MigrationsFolder run_before_all { get; }
         MigrationsFolder alter_database { get; }
         MigrationsFolder run_after_create_database { get; }
 		MigrationsFolder run_before_up { get; }

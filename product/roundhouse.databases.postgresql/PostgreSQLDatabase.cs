@@ -9,6 +9,8 @@ namespace roundhouse.databases.postgresql
     using infrastructure.logging;
     using Npgsql;
 
+    using roundhouse.migrators;
+
     public class PostgreSQLDatabase : AdoNetDatabase
     {
         public override bool split_batch_statements
@@ -146,6 +148,11 @@ namespace roundhouse.databases.postgresql
             Log.bound_to(this).log_an_info_event_containing("Creating table [{0}_{1}].", roundhouse_schema_name, scripts_run_errors_table_name);
             run_sql(TableCreationScripts.create_roundhouse_scripts_run_errors_table(roundhouse_schema_name, scripts_run_errors_table_name),
                     ConnectionType.Default);
+        }
+
+        public override MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         public override void run_database_specific_tasks()

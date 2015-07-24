@@ -64,7 +64,9 @@ namespace roundhouse.databases
 {
     using System;
     using infrastructure.app;
-    
+
+    using roundhouse.migrators;
+
     public interface Database : IDisposable
     {
         ConfigurationPropertyHolder configuration { get; set; }
@@ -109,5 +111,7 @@ namespace roundhouse.databases
         bool has_run_script_already(string script_name);
         string get_current_script_hash(string script_name);
         //object run_sql_scalar(string sql_to_run);
+
+        MirroringStatus get_mirroring_status();
     }
 }

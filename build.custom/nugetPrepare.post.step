@@ -44,13 +44,13 @@
     </move>
     <delete dir="${dirs.drop.nuget}\lib\MSBuild" />
     
-    <echo level="Warning" message="Moving ${dirs.drop.nuget}\lib\console to ${dirs.drop.nuget}\roundhouse\bin." />
+    <echo level="Warning" message="Moving ${dirs.drop.nuget}\lib\ConsoleApp to ${dirs.drop.nuget}\roundhouse\bin." />
     <move todir="${dirs.drop.nuget}\roundhouse\bin" overwrite="true">
-      <fileset basedir="${dirs.drop.nuget}\lib\console">
+      <fileset basedir="${dirs.drop.nuget}\lib\ConsoleApp">
         <include name="**/*.*" />
       </fileset>
     </move>
-    <delete dir="${dirs.drop.nuget}\lib\console" />
+    <delete dir="${dirs.drop.nuget}\lib\ConsoleApp" />
   
     <echo level="Warning" message="Moving ${dirs.drop.nuget}\lib\lib to ${dirs.drop.nuget}\roundhouse.lib\lib." />
     <move todir="${dirs.drop.nuget}\roundhouse.lib\lib" overwrite="true">

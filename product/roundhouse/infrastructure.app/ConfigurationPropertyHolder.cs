@@ -14,11 +14,13 @@ namespace roundhouse.infrastructure.app
         string ConnectionStringAdmin { get; set; }
         int CommandTimeout { get; set; }
         int CommandTimeoutAdmin { get; set; }
+        bool CheckMirroring { get; set; }
         string SqlFilesDirectory { get; set; }
         string RepositoryPath { get; set; }
         string Version { get; set; }
         string VersionFile { get; set; }
         string VersionXPath { get; set; }
+        string RunBeforeAll { get; set; }
         string AlterDatabaseFolderName { get; set; }
         string RunAfterCreateDatabaseFolderName { get; set; }
 		string RunBeforeUpFolderName { get; set; }

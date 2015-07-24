@@ -396,5 +396,11 @@ namespace roundhouse.migrators
 
             return environment_file_is_in_the_right_environment;
         }
+
+
+        public MirroringStatus get_mirroring_status()
+        {
+            return this.database.get_mirroring_status();
+        }
     }
 }

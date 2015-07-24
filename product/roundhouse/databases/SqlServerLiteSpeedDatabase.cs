@@ -4,6 +4,8 @@ namespace roundhouse.databases
     using infrastructure.app;
     using infrastructure.persistence;
 
+    using roundhouse.migrators;
+
     public sealed class SqlServerLiteSpeedDatabase : Database
     {
         private readonly Database database;
@@ -244,6 +246,11 @@ namespace roundhouse.databases
         public string get_current_script_hash(string script_name)
         {
             return database.get_current_script_hash(script_name);
+        }
+
+        public MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         private bool disposing = false;

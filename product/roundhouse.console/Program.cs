@@ -133,6 +133,10 @@ namespace roundhouse.console
                          "DatabaseType - Tells RH what type of database it is running on. This is a plugin model. This is the fully qualified name of a class that implements the interface roundhouse.sql.Database, roundhouse. If you have your own assembly, just set it next to rh.exe and set this value appropriately. Defaults to 'sqlserver' which is a synonym for '{0}'.",
                          ApplicationParameters.default_database_type),
                      option => configuration.DatabaseType = option)
+                .Add("cm|checkmirroring",
+                     string.Format(
+                         "CheckMirroring - Tells RH to not check the mirroring status of the database first and not to run scripts on mirror db."),
+                     option => configuration.CheckMirroring = true)
                 // versioning
                 .Add("r=|repo=|repositorypath=",
                      string.Format(
@@ -155,6 +159,11 @@ namespace roundhouse.console
                          "AlterDatabaseFolderName - The name of the folder where you keep your alter database scripts. Read up on token replacement. You will want to use {{DatabaseName}} here instead of specifying a database name. Will recurse through subfolders. Defaults to \"{0}\".",
                          ApplicationParameters.default_alter_database_folder_name),
                      option => configuration.AlterDatabaseFolderName = option)
+                .Add("rba=|runbeforeall=",
+                     string.Format(
+                         "RunBeforeAll - The name of the folder where you will keep scripts that run before all scripts everytime.  Will recurse through subfolders. Defaults to \"{0}\".",
+                         ApplicationParameters.default_run_before_all_name),
+                     option => configuration.RunBeforeAll = option)
                 .Add("racd=|runaftercreatedatabase=|runaftercreatedatabasefolder=|runaftercreatedatabasefoldername=",
                      string.Format(
                          "RunAfterCreateDatabaseFolderName - The name of the folder where you will keep scripts that ONLY run after a database is created.  Will recurse through subfolders. Defaults to \"{0}\".",

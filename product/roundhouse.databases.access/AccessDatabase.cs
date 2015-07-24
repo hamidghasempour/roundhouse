@@ -8,6 +8,8 @@ namespace roundhouse.databases.access
     using infrastructure.app;
     using infrastructure.extensions;
 
+    using roundhouse.migrators;
+
     public class AccessDatabase : AdoNetDatabase
     {
         private string connect_options = "Trusted_Connection";
@@ -105,6 +107,11 @@ namespace roundhouse.databases.access
         {
             Log.bound_to(this).log_a_debug_event_containing("Access has no specific database tasks. Returning...");
             //TODO: Anything for Access?
+        }
+
+        public override MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         public override string create_database_script()

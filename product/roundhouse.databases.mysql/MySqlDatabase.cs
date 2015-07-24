@@ -7,6 +7,8 @@ namespace roundhouse.databases.mysql
     using infrastructure.logging;
     using MySql.Data.MySqlClient;
 
+    using roundhouse.migrators;
+
     public class MySqlDatabase : AdoNetDatabase
     {
         private readonly MySqlAdoNetProviderResolver my_sql_ado_net_provider_resolver;
@@ -117,6 +119,11 @@ namespace roundhouse.databases.mysql
             
             var script = new MySqlScript(connection, sql_to_run);
             script.Execute();
+        }
+
+        public override MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         public override string set_recovery_mode_script(bool simple)

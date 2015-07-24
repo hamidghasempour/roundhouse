@@ -3,6 +3,7 @@ namespace roundhouse.folders
     public sealed class DefaultKnownFolders : KnownFolders
     {
         public DefaultKnownFolders(
+                                   MigrationsFolder run_before_all,
                                    MigrationsFolder alter_database,
                                    MigrationsFolder run_after_create_database,
 								   MigrationsFolder run_before_up,
@@ -20,6 +21,7 @@ namespace roundhouse.folders
                                    Folder change_drop
             )
         {
+            this.run_before_all = run_before_all;
             this.alter_database = alter_database;
             this.run_after_create_database = run_after_create_database;
 			this.run_before_up = run_before_up;
@@ -37,6 +39,7 @@ namespace roundhouse.folders
             this.after_migration = after_migration;
         }
 
+        public MigrationsFolder run_before_all { get; private set; }
         public MigrationsFolder alter_database { get; private set; }
         public MigrationsFolder run_after_create_database { get; private set; }
 		public MigrationsFolder run_before_up { get; private set; }

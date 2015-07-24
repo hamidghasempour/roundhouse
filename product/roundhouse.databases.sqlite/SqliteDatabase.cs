@@ -7,6 +7,8 @@
     using infrastructure.extensions;
     using infrastructure.logging;
 
+    using roundhouse.migrators;
+
     public class SqliteDatabase : AdoNetDatabase
     {
         private readonly SqliteAdoNetProviderResolver sqlite_ado_net_provider_resolver;
@@ -118,6 +120,11 @@
         public override void run_database_specific_tasks()
         {
             Log.bound_to(this).log_a_debug_event_containing("Sqlite has no database specific tasks. Moving along now...");
+        }
+
+        public override MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         public override string set_recovery_mode_script(bool simple)

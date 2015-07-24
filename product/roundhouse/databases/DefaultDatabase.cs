@@ -15,6 +15,9 @@ namespace roundhouse.databases
     using NHibernate.Criterion;
     using NHibernate.Tool.hbm2ddl;
     using parameters;
+
+    using roundhouse.migrators;
+
     using sqlsplitters;
     using Environment = System.Environment;
     using Version = model.Version;
@@ -355,6 +358,8 @@ namespace roundhouse.databases
 
             return hash;
         }
+
+        public abstract MirroringStatus get_mirroring_status();
 
         public bool has_run_script_already(string script_name)
         {

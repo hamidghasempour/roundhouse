@@ -56,6 +56,8 @@
 
         public string ConnectionString { get; set; }
 
+        public bool CheckMirroring { get; set; }
+
         public string ConnectionStringAdmin { get; set; }
 
         public int CommandTimeout { get; set; }
@@ -71,6 +73,8 @@
         public string VersionFile { get; set; }
 
         public string VersionXPath { get; set; }
+
+        public string RunBeforeAll { get; set; }
 
         public string AlterDatabaseFolderName { get; set; }
 

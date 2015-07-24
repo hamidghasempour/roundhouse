@@ -49,6 +49,10 @@ namespace roundhouse.infrastructure.app
             {
                 configuration_property_holder.CommandTimeoutAdmin = ApplicationParameters.default_admin_command_timeout;
             }
+            if (string.IsNullOrEmpty(configuration_property_holder.RunBeforeAll))
+            {
+                configuration_property_holder.RunBeforeAll = ApplicationParameters.default_run_before_all_name;
+            }
             if (string.IsNullOrEmpty(configuration_property_holder.AlterDatabaseFolderName))
             {
                 configuration_property_holder.AlterDatabaseFolderName = ApplicationParameters.default_alter_database_folder_name;

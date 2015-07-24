@@ -5,6 +5,8 @@ namespace roundhouse.databases
     using infrastructure.logging;
     using infrastructure.persistence;
 
+    using roundhouse.migrators;
+
     public class MockDatabase : Database
     {
 
@@ -259,6 +261,11 @@ namespace roundhouse.databases
             }
 
             return string.Empty;
+        }
+
+        public MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         private bool disposing = false;

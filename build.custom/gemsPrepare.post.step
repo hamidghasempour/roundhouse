@@ -36,13 +36,13 @@
   
   <target name="run_tasks">
     <copy todir="${dirs.drop}\${folder.gems}\bin">
-      <fileset basedir="${dirs.drop}\${folder.app.drop}\console">
+      <fileset basedir="${dirs.drop}\${folder.app.drop}\ConsoleApp">
         <include name="**/*.*" />
       </fileset>
     </copy>
     
     <copy todir="${dirs.drop}\${folder.gems}\lib">
-      <fileset basedir="${dirs.drop}\${folder.gems}\lib\console">
+      <fileset basedir="${dirs.drop}\${folder.gems}\lib\ConsoleApp">
         <include name="**/*.*" />
       </fileset>
     </copy>
@@ -55,7 +55,7 @@
    
     <delete>
       <fileset basedir="${dirs.drop}\${folder.gems}\lib" >
-        <include name="console/**" />
+        <include name="ConsoleApp/**" />
         <include name="lib/**" />
       </fileset>
     </delete>

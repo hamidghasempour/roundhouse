@@ -98,6 +98,18 @@ namespace roundhouse.runners
                 //database_migrator.backup_database_if_it_exists();
                 remove_share_from_change_drop_folder();
 
+                // TODO: add check mirrorring here
+                if (this.configuration.CheckMirroring)
+                {
+                    Log.bound_to(this).log_an_info_event_containing("Check for mirroring is enabled.");
+                    if (database_migrator.get_mirroring_status() == MirroringStatus.Mirror)
+                    {
+                        Log.bound_to(this).log_a_warning_event_containing("The database is in mirror state. no scripts will be run.");
+                        return;
+                    }
+                    Log.bound_to(this).log_an_info_event_containing("Database is principal/stand alone.");
+                }
+
                 bool database_was_created = false;
 
                 if (!dropping_the_database)
@@ -133,6 +145,7 @@ namespace roundhouse.runners
                     run_out_side_of_transaction_folder(known_folders.before_migration, version_id, new_version);
                     
                     database_migrator.open_admin_connection();
+                    log_and_traverse(known_folders.run_before_all, version_id, new_version, ConnectionType.Admin);
                     log_and_traverse(known_folders.alter_database, version_id, new_version, ConnectionType.Admin);
                     database_migrator.close_admin_connection();
 

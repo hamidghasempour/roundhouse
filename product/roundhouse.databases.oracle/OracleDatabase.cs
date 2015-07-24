@@ -11,6 +11,8 @@ namespace roundhouse.databases.oracle
     using infrastructure.extensions;
     using parameters;
 
+    using roundhouse.migrators;
+
     public sealed class OracleDatabase : AdoNetDatabase
     {
         private string connect_options = "Integrated Security";
@@ -139,6 +141,11 @@ namespace roundhouse.databases.oracle
 
             var select_parameters = new List<IParameter<IDbDataParameter>> { create_parameter("repository_path", DbType.AnsiString, repository_path, 255) };
             return Convert.ToInt64(run_sql_scalar(get_version_id_script(), ConnectionType.Default, select_parameters));
+        }
+
+        public override MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         public override void run_sql(string sql_to_run, ConnectionType connection_type)

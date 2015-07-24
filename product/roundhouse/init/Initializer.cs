@@ -20,6 +20,7 @@
 
         public void Initialize(ConfigurationPropertyHolder properties, string path)
         {
+            makeDir(_knownFolders.run_before_all);
             makeDir(_knownFolders.alter_database);
             makeDir(_knownFolders.change_drop);
             makeDir(_knownFolders.down);

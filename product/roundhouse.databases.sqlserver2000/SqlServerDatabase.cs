@@ -6,6 +6,8 @@ namespace roundhouse.databases.sqlserver2000
     using infrastructure.app;
     using infrastructure.extensions;
 
+    using roundhouse.migrators;
+
     public class SqlServerDatabase : AdoNetDatabase
     {
         private string connect_options = "Integrated Security";
@@ -89,6 +91,11 @@ namespace roundhouse.databases.sqlserver2000
             //TODO: Create user
 
             //run_sql(set_recovery_mode_script(simple)
+        }
+
+        public override MirroringStatus get_mirroring_status()
+        {
+            return MirroringStatus.None;
         }
 
         public override string create_database_script()

@@ -20,24 +20,24 @@
   <target name="go" depends="copy_roundhouse_files_to_deploy_console, merge_the_dll, merge_the_msbuild" />
  
   <target name="sign_merged_exe">
-    <al output="${dirs.app.drop}\console\rh.exe" keyfile="${file.key}" target="exe">
+    <al output="${dirs.app.drop}\ConsoleApp\rh.exe" keyfile="${file.key}" target="exe">
       <sources>
-        <include name="${dirs.app.drop}\console\rh.exe" />
+        <include name="${dirs.app.drop}\ConsoleApp\rh.exe" />
       </sources>
     </al>
   </target>
  
   <target name="copy_roundhouse_files_to_deploy_console">
-  <echo level="Warning" message="Removing original roundhouse assemblies from ${dirs.deployment}\console."/>
+  <echo level="Warning" message="Removing original roundhouse assemblies from ${dirs.deployment}\ConsoleApp."/>
     <delete>
-      <fileset basedir="${dirs.drop}\sample\${folder.deployment}\console" >
+      <fileset basedir="${dirs.drop}\sample\${folder.deployment}\ConsoleApp" >
         <include name="*.*" />
       </fileset>
     </delete>
   
-    <echo level="Warning" message="Copying roundhouse assemblies from '${dirs.app.drop}\console' to '${dirs.deployment}\console'."/>
-    <copy todir="${dirs.drop}\sample\${folder.deployment}\console">
-      <fileset basedir="${dirs.app.drop}\console">
+    <echo level="Warning" message="Copying roundhouse assemblies from '${dirs.app.drop}\ConsoleApp' to '${dirs.deployment}\ConsoleApp'."/>
+    <copy todir="${dirs.drop}\sample\${folder.deployment}\ConsoleApp">
+      <fileset basedir="${dirs.app.drop}\ConsoleApp">
         <include name="*.*" />
       </fileset>
     </copy>

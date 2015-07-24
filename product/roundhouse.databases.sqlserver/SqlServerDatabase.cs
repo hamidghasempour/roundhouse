@@ -10,6 +10,10 @@ namespace roundhouse.databases.sqlserver
     using infrastructure.extensions;
     using infrastructure.logging;
 
+    using NHibernate.Util;
+
+    using roundhouse.migrators;
+
     public class SqlServerDatabase : AdoNetDatabase
     {
         private string connect_options = "Integrated Security=SSPI;";
@@ -72,6 +76,35 @@ namespace roundhouse.databases.sqlserver
 
             Log.bound_to(this).log_a_debug_event_containing("FUTURE ENHANCEMENT: This should remove a user named RoundhousE if one exists (migration from SQL2000 up)");
             //TODO: Delete RoundhousE user if it exists (i.e. migration from SQL2000 to 2005)
+        }
+
+        public override MirroringStatus get_mirroring_status()
+        {
+            var SQl = 
+                string.Format(@"
+                    SELECT ISNULL(mirroring_role, 0) as mirroring_role
+                        FROM sys.database_mirroring
+                            WHERE DB_NAME(database_id) = N'{0}'
+                ", database_name);
+
+            var dt = this.execute_datatable(SQl, ConnectionType.Admin);
+            if (dt != null &&
+                dt.Rows != null &&
+                dt.Rows.Any())
+            {
+                var mirroring_role = Convert.ToInt32(dt.Rows[0]["mirroring_role"]);
+                switch (mirroring_role)
+                {
+                    case 2:
+                        return MirroringStatus.Mirror;
+                    case 1:
+                        return MirroringStatus.Principal;
+                    default:
+                        break;
+                }
+            }
+
+            return MirroringStatus.None;
         }
 
         public void create_roundhouse_schema_if_it_doesnt_exist()
@@ -199,11 +232,11 @@ namespace roundhouse.databases.sqlserver
         /// <summary>
         /// Low level hit to query the database for a restore
         /// </summary>
-        private DataTable execute_datatable(string sql_to_run)
+        private DataTable execute_datatable(string sql_to_run, ConnectionType connectionType = ConnectionType.Default)
         {
             DataSet result = new DataSet();
 
-            using (IDbCommand command = setup_database_command(sql_to_run,ConnectionType.Default,null))
+            using (IDbCommand command = setup_database_command(sql_to_run, connectionType,null))
             {
                 using (IDataReader data_reader = command.ExecuteReader())
                 {

@@ -8,6 +8,7 @@ namespace roundhouse.infrastructure.app.builders
     {
         public static KnownFolders build(FileSystemAccess file_system, ConfigurationPropertyHolder configuration_property_holder)
         {
+            MigrationsFolder run_before_all = new DefaultMigrationsFolder(file_system, configuration_property_holder.SqlFilesDirectory, configuration_property_holder.RunBeforeAll, false, true, "Run Before All Everytime");
             MigrationsFolder alter_database_folder = new DefaultMigrationsFolder(file_system, configuration_property_holder.SqlFilesDirectory, configuration_property_holder.AlterDatabaseFolderName, false, false, "AlterDatabase");
             MigrationsFolder run_after_create_database_folder = new DefaultMigrationsFolder(file_system, configuration_property_holder.SqlFilesDirectory, configuration_property_holder.RunAfterCreateDatabaseFolderName, true, false, "Run After Create Database");
 	        MigrationsFolder run_before_up_folder = new DefaultMigrationsFolder(file_system, configuration_property_holder.SqlFilesDirectory, configuration_property_holder.RunBeforeUpFolderName, false, false, "Run Before Update");
@@ -30,7 +31,7 @@ namespace roundhouse.infrastructure.app.builders
                                                                                                    remove_paths_from(configuration_property_holder.ServerName,file_system)),
                                                           get_run_date_time_string());
 
-			return new DefaultKnownFolders(alter_database_folder, run_after_create_database_folder, run_before_up_folder, up_folder, down_folder, run_first_folder, functions_folder, views_folder, sprocs_folder, indexes_folder, runAfterOtherAnyTimeScripts_folder, permissions_folder, before_migration_folder, after_migration_folder, change_drop_folder);
+            return new DefaultKnownFolders(run_before_all, alter_database_folder, run_after_create_database_folder, run_before_up_folder, up_folder, down_folder, run_first_folder, functions_folder, views_folder, sprocs_folder, indexes_folder, runAfterOtherAnyTimeScripts_folder, permissions_folder, before_migration_folder, after_migration_folder, change_drop_folder);
         }
 
         private static string combine_items_into_one_path(FileSystemAccess file_system, params string[] paths)

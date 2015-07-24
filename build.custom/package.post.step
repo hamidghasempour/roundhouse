@@ -54,8 +54,8 @@
     </move>
     <delete dir="${dirs.drop}\${folder.app.drop}\roundhouse.tasks" />
     
-    <echo level="Warning" message="Renaming ${dirs.drop}\${folder.app.drop}\roundhouse.console to ${dirs.drop}\${folder.app.drop}\console." />
-    <move todir="${dirs.drop}\${folder.app.drop}\console" overwrite="true">
+    <echo level="Warning" message="Renaming ${dirs.drop}\${folder.app.drop}\roundhouse.console to ${dirs.drop}\${folder.app.drop}\ConsoleApp." />
+    <move todir="${dirs.drop}\${folder.app.drop}\ConsoleApp" overwrite="true">
       <fileset basedir="${dirs.drop}\${folder.app.drop}\roundhouse.console">
         <include name="**/*.*" />
       </fileset>
@@ -64,9 +64,9 @@
   </target>
   
   <target name="copy_roundhouse_files_to_deploy_console">
-    <echo level="Warning" message="Copying roundhouse assemblies to ${dirs.deployment}\console."/>
-    <copy todir="${dirs.deployment}\Console">
-      <fileset basedir="${dirs.drop}\${folder.app.drop}\console">
+    <echo level="Warning" message="Copying roundhouse assemblies to ${dirs.deployment}\ConsoleApp."/>
+    <copy todir="${dirs.deployment}\ConsoleApp">
+      <fileset basedir="${dirs.drop}\${folder.app.drop}\ConsoleApp">
         <include name="*.*" />
       </fileset>
     </copy>
